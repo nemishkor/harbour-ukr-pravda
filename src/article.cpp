@@ -84,3 +84,13 @@ void Article::setResource(const QString &newResource)
 {
     resource = newResource;
 }
+
+const QString &Article::getCreatedDate() const
+{
+    return createdDate;
+}
+
+void Article::setCreatedDate(const QString &newCreatedDate)
+{
+    createdDate = newCreatedDate;
+}

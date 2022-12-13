@@ -41,6 +41,8 @@ QVariant ArticlesListModel::data(const QModelIndex &index, int role) const
         return item.getSubtitle();
     if(role == CreatedRole)
         return item.getCreated();
+    if(role == CreatedDateRole)
+        return item.getCreatedDate();
     if(role == LinkRole)
         return item.getLink();
     if(role == ImagePreviewLinkRole)
@@ -60,6 +62,7 @@ QHash<int, QByteArray> ArticlesListModel::roleNames() const
     roles[TitleRole] = "title";
     roles[SubtitleRole] = "subtitle";
     roles[CreatedRole] = "created";
+    roles[CreatedDateRole] = "createdDate";
     roles[LinkRole] = "link";
     roles[ImagePreviewLinkRole] = "imagePreviewLink";
     roles[TextRole] = "text";

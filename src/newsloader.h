@@ -23,7 +23,8 @@ public:
     QString &getError();
 
 private:
-    QString dateTimeFormat;
+    QString dateFormat;
+    QString timeFormat;
     QNetworkAccessManager *networkManager;
     QPointer<QNetworkReply> listReply;
     ArticlesListModel *articlesListModel;

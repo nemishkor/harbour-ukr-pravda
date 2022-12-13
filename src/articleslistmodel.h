@@ -14,6 +14,7 @@ public:
         TitleRole = Qt::DisplayRole,
         IdRole = Qt::UserRole + 1,
         CreatedRole,
+        CreatedDateRole,
         LinkRole,
         ImagePreviewLinkRole,
         SubtitleRole,

@@ -32,9 +32,13 @@ public:
     const QString &getResource() const;
     void setResource(const QString &newResource);
 
+    const QString &getCreatedDate() const;
+    void setCreatedDate(const QString &newCreated_date);
+
 private:
     int id;
     QString created;
+    QString createdDate;
     QString link;
     QString imagePreviewLink;
     QString title;

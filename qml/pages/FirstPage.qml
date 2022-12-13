@@ -55,6 +55,15 @@ Page {
                 title: qsTr("Articles")
             }
 
+            section {
+                property: 'createdDate'
+
+                delegate: SectionHeader {
+                    text: section
+                    height: Theme.itemSizeExtraSmall
+                }
+            }
+
             delegate: ListItem {
                 id: delegate
                 contentHeight: column.height + separator.height + Theme.paddingMedium * 2

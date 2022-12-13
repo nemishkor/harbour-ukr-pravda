@@ -4,7 +4,8 @@ NewsLoader::NewsLoader(ArticlesListModel *articlesListModel, QObject *parent) :
     QObject(parent),
     articlesListModel(articlesListModel)
 {
-    dateTimeFormat = QLocale::system().dateTimeFormat(QLocale::ShortFormat);
+    dateFormat = QLocale::system().dateFormat(QLocale::ShortFormat);
+    timeFormat = QLocale::system().timeFormat(QLocale::ShortFormat);
     networkManager = new QNetworkAccessManager(this);
     listReply = nullptr;
 }
@@ -58,12 +59,10 @@ void NewsLoader::listReplyFinished()
         apiArticle = (*i).toObject();
         Article article;
         article.setId(apiArticle["id"].toInt());
-        QDateTime createdDate = QDateTime::fromMSecsSinceEpoch((qint64)apiArticle["created"].toInt() * 1000, Qt::UTC);
-        qDebug() << "createdDate API unix" << apiArticle["created"].toInt();
-        qDebug() << "         createdDate" << createdDate.toString(dateTimeFormat);
-        qDebug() << "    createdDate unix" << (createdDate.toMSecsSinceEpoch() / 1000);
-        qDebug() << "   local createdDate" << createdDate.toLocalTime().toString(dateTimeFormat);
-        article.setCreated(createdDate.toLocalTime().toString(dateTimeFormat));
+        QDateTime createdDate = QDateTime::fromMSecsSinceEpoch((qint64)apiArticle["created"].toInt() * 1000, Qt::UTC).toLocalTime();
+        article.setCreated(createdDate.toString(timeFormat));
+        qDebug() << "createdDate.toString(dateFormat)" << createdDate.toString(dateFormat);
+        article.setCreatedDate(createdDate.toString(dateFormat));
         article.setLink(apiArticle["link"].toString());
         if(apiArticle["imagePreviewLink"].isString()){
             article.setImagePreviewLink(apiArticle["imagePreviewLink"].toString());
