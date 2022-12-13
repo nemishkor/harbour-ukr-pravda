@@ -13,15 +13,41 @@ void NewsLoader::loadList()
 {
     if(listReply != nullptr){
         listReply->abort();
+        listReply->deleteLater();
     }
+    error.clear();
+    emit errorChanged();
     QNetworkRequest request(QUrl("http://104.248.143.138/api/articles"));
     listReply = networkManager->get(request);
+    emit loadingChanged();
     connect(listReply, &QNetworkReply::finished, this, &NewsLoader::listReplyFinished);
+}
+
+bool NewsLoader::isLoading()
+{
+    return listReply && listReply->isRunning();
+}
+
+QString &NewsLoader::getError()
+{
+    return error;
 }
 
 void NewsLoader::listReplyFinished()
 {
     QJsonDocument json = QJsonDocument::fromJson(listReply->readAll());
+    if(listReply->error() != QNetworkReply::NoError){
+        error = listReply->errorString();
+        if(listReply->error() == QNetworkReply::UnknownNetworkError){
+            error.append(". ").append(tr("Check your Internet connection"));
+        }
+        emit errorChanged();
+        listReply->deleteLater();
+        emit loadingChanged();
+        return;
+    }
+    listReply->deleteLater();
+    emit loadingChanged();
     QJsonObject root = json.object();
     page = root["page"].toInt();
     total = root["total"].toInt();
@@ -33,6 +59,10 @@ void NewsLoader::listReplyFinished()
         Article article;
         article.setId(apiArticle["id"].toInt());
         QDateTime createdDate = QDateTime::fromMSecsSinceEpoch((qint64)apiArticle["created"].toInt() * 1000, Qt::UTC);
+        qDebug() << "createdDate API unix" << apiArticle["created"].toInt();
+        qDebug() << "         createdDate" << createdDate.toString(dateTimeFormat);
+        qDebug() << "    createdDate unix" << (createdDate.toMSecsSinceEpoch() / 1000);
+        qDebug() << "   local createdDate" << createdDate.toLocalTime().toString(dateTimeFormat);
         article.setCreated(createdDate.toLocalTime().toString(dateTimeFormat));
         article.setLink(apiArticle["link"].toString());
         if(apiArticle["imagePreviewLink"].isString()){

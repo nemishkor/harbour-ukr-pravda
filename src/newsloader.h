@@ -1,30 +1,40 @@
 #ifndef NEWSLOADER_H
 #define NEWSLOADER_H
 
+#include <QDebug>
 #include <QNetworkReply>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QObject>
+#include <QPointer>
 
 #include "articleslistmodel.h"
 
 class NewsLoader : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool loading READ isLoading NOTIFY loadingChanged)
+    Q_PROPERTY(QString error READ getError NOTIFY errorChanged)
 public:
     explicit NewsLoader(ArticlesListModel *articlesListModel, QObject *parent = nullptr);
     Q_INVOKABLE void loadList();
+    bool isLoading();
+    QString &getError();
 
 private:
     QString dateTimeFormat;
     QNetworkAccessManager *networkManager;
-    QNetworkReply *listReply;
+    QPointer<QNetworkReply> listReply;
     ArticlesListModel *articlesListModel;
     int page = 1;
     int total = -1;
+    QString error;
 
 signals:
+    void loadingChanged();
+    void errorChanged();
+
 private slots:
     void listReplyFinished();
 

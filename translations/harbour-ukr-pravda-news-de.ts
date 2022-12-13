@@ -14,5 +14,16 @@
         <source>Articles</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewsLoader</name>
+    <message>
+        <source>Check your Internet connection</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
