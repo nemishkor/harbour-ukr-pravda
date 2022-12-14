@@ -7,21 +7,25 @@ NewsLoader::NewsLoader(ArticlesListModel *articlesListModel, QObject *parent) :
     dateFormat = QLocale::system().dateFormat(QLocale::ShortFormat);
     timeFormat = QLocale::system().timeFormat(QLocale::ShortFormat);
     networkManager = new QNetworkAccessManager(this);
-    listReply = nullptr;
+    apiBaseUrl = "http://104.248.143.138";
 }
 
 void NewsLoader::loadList()
 {
-    if(listReply != nullptr){
+    if(listReply){
+        qDebug() << "abort old request";
         listReply->abort();
         listReply->deleteLater();
     }
     error.clear();
     emit errorChanged();
-    QNetworkRequest request(QUrl("http://104.248.143.138/api/articles"));
+    QUrl url(apiBaseUrl + "/api/articles");
+    qDebug() << "request to" << url.toString();
+    QNetworkRequest request(url);
     listReply = networkManager->get(request);
     emit loadingChanged();
     connect(listReply, &QNetworkReply::finished, this, &NewsLoader::listReplyFinished);
+    connect(listReply, &QNetworkReply::sslErrors, this, &NewsLoader::listReplySslErrors);
 }
 
 bool NewsLoader::isLoading()
@@ -36,8 +40,13 @@ QString &NewsLoader::getError()
 
 void NewsLoader::listReplyFinished()
 {
-    QJsonDocument json = QJsonDocument::fromJson(listReply->readAll());
+    qDebug() << "request to" << listReply->url().toString() << "finished";
+    QByteArray body = listReply->readAll();
+    int code = listReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if(listReply->error() != QNetworkReply::NoError){
+        qDebug() << "request to" << listReply->url().toString() << "failed with error" << listReply->errorString();
+        qDebug() << "http response code" << code;
+        qDebug() << "http response body:" << body;
         error = listReply->errorString();
         if(listReply->error() == QNetworkReply::UnknownNetworkError){
             error.append(". ").append(tr("Check your Internet connection"));
@@ -47,6 +56,7 @@ void NewsLoader::listReplyFinished()
         emit loadingChanged();
         return;
     }
+    QJsonDocument json = QJsonDocument::fromJson(body);
     listReply->deleteLater();
     emit loadingChanged();
     QJsonObject root = json.object();
@@ -61,7 +71,6 @@ void NewsLoader::listReplyFinished()
         article.setId(apiArticle["id"].toInt());
         QDateTime createdDate = QDateTime::fromMSecsSinceEpoch((qint64)apiArticle["created"].toInt() * 1000, Qt::UTC).toLocalTime();
         article.setCreated(createdDate.toString(timeFormat));
-        qDebug() << "createdDate.toString(dateFormat)" << createdDate.toString(dateFormat);
         article.setCreatedDate(createdDate.toString(dateFormat));
         article.setLink(apiArticle["link"].toString());
         if(apiArticle["imagePreviewLink"].isString()){
@@ -75,4 +84,13 @@ void NewsLoader::listReplyFinished()
         article.setResource(apiArticle["resource"].toString());
         articlesListModel->add(article);
     }
+}
+
+void NewsLoader::listReplySslErrors(const QList<QSslError> &errors)
+{
+    qWarning() << errors.count() << "SSL error(s)";
+    for(QSslError error : errors){
+        qWarning() << "sslError:" << error.errorString();
+    }
+    listReply->ignoreSslErrors(errors);
 }

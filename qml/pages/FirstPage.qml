@@ -118,7 +118,4 @@ Page {
 
     }
 
-//    SilicaListView {
-
-//    }
 }

@@ -13,8 +13,8 @@ Name[de]=harbour-ukr-pravda-news
 
 [X-Sailjail]
 # Replace with your organization as a reverse domain name
-OrganizationName=org.myorg
+OrganizationName=org.nemishkor
 # ApplicationName does not have to be identical to Name
 ApplicationName=ukr-pravda-news
 # Add the required permissions here
-Permissions=
+Permissions=Internet

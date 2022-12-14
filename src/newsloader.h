@@ -2,6 +2,7 @@
 #define NEWSLOADER_H
 
 #include <QDebug>
+#include <QNetworkConfiguration>
 #include <QNetworkReply>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -31,6 +32,7 @@ private:
     int page = 1;
     int total = -1;
     QString error;
+    QString apiBaseUrl;
 
 signals:
     void loadingChanged();
@@ -38,6 +40,7 @@ signals:
 
 private slots:
     void listReplyFinished();
+    void listReplySslErrors(const QList<QSslError> &errors);
 
 };
 
