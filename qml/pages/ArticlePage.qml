@@ -9,10 +9,15 @@ Page {
     allowedOrientations: Orientation.All
 
     ListView {
+        id: articlesListView
         anchors.fill: parent
         snapMode: ListView.SnapOneItem
         orientation: ListView.Horizontal
         model: articlesListModel
+
+        Component.onCompleted: {
+            articlesListView.positionViewAtIndex(index, ListView.SnapPosition)
+        }
 
         delegate: SilicaFlickable {
             contentHeight: col.height
