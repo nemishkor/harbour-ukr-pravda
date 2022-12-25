@@ -90,8 +90,6 @@ void NewsLoader::listReplyFinished()
         for (iLabels = labels.constBegin(); iLabels != labels.constEnd(); iLabels++){
             article->addLabel((*iLabels).toString());
         }
-        article->addLabel("Відео");
-        article->addLabel("Фото");
         articlesListModel->add(article);
     }
 }
