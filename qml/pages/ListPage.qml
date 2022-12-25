@@ -71,12 +71,7 @@ Page {
                 contentHeight: column.height + separator.height + Theme.paddingMedium * 2
                 onClicked: {
                     news.mode = 1
-                    if(index > 0){
-                        pageStack.replace(Qt.resolvedUrl("ArticlePage.qml"), { index: index - 1 }, PageStackAction.Immediate)
-                        pageStack.push(Qt.resolvedUrl("ArticlePage.qml"), { index: index }, PageStackAction.Immediate)
-                    } else {
-                        pageStack.animatorReplace(Qt.resolvedUrl("ArticlePage.qml"), { index: index }, PageStackAction.Immediate)
-                    }
+                    pageStack.replace(Qt.resolvedUrl("ArticlePage.qml"), { index: index }, PageStackAction.Immediate)
                 }
 
                 Column {
