@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>ArticlePage</name>
+    <message>
+        <source>Open full page</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>My Cover</source>
@@ -9,13 +16,17 @@
     </message>
 </context>
 <context>
-    <name>FirstPage</name>
+    <name>ListPage</name>
     <message>
-        <source>Articles</source>
+        <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Refresh</source>
+        <source>Ukrainska pravda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>news</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

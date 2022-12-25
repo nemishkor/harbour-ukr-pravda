@@ -2,6 +2,7 @@
 #include <sailfishapp.h>
 
 #include "articleslistmodel.h"
+#include "news.h"
 #include "newsloader.h"
 
 static QMutex mutex; // global variable
@@ -42,13 +43,16 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
     QScopedPointer<QQuickView> view(SailfishApp::createView());
 
+    Article article;
+    ArticlesListModel list(&article);
+    News news(&article, &list);
+    NewsLoader newsLoader(&list);
+
     QQmlContext *context = view.data()->rootContext();
-
-    ArticlesListModel articlesListModel;
-    NewsLoader *newsLoader = new NewsLoader(&articlesListModel);
-
-    context->setContextProperty("newsLoader", newsLoader);
-    context->setContextProperty("articlesListModel", &articlesListModel);
+    context->setContextProperty("articlesListModel", &list);
+    context->setContextProperty("newsLoader", &newsLoader);
+    context->setContextProperty("article", &article);
+    context->setContextProperty("news", &news);
 
     qDebug() << "Start";
 

@@ -9,6 +9,7 @@ Page {
     onStatusChanged: {
         if (status === PageStatus.Active){
             newsLoader.loadList()
+            news.mode = 0
         }
     }
 
@@ -52,7 +53,8 @@ Page {
             visible: !newsLoader.loading
 
             header: PageHeader {
-                title: qsTr("Articles")
+                title: qsTr("Ukrainska pravda")
+                description: qsTr("news")
             }
 
             section {
@@ -67,6 +69,15 @@ Page {
             delegate: ListItem {
                 id: delegate
                 contentHeight: column.height + separator.height + Theme.paddingMedium * 2
+                onClicked: {
+                    news.mode = 1
+                    if(index > 0){
+                        pageStack.replace(Qt.resolvedUrl("ArticlePage.qml"), { index: index - 1 }, PageStackAction.Immediate)
+                        pageStack.push(Qt.resolvedUrl("ArticlePage.qml"), { index: index }, PageStackAction.Immediate)
+                    } else {
+                        pageStack.animatorReplace(Qt.resolvedUrl("ArticlePage.qml"), { index: index }, PageStackAction.Immediate)
+                    }
+                }
 
                 Column {
                     id: column
@@ -80,6 +91,7 @@ Page {
                         color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                         wrapMode: "WordWrap"
                         text: model.title
+                        font.bold: model.isImportant
                     }
 
                     Label {
@@ -91,12 +103,37 @@ Page {
                         text: model.subtitle
                     }
 
-                    Label {
+                    Row {
                         x: Theme.horizontalPageMargin
                         width: parent.width - 2 * Theme.horizontalPageMargin
-                        color: delegate.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                        text: model.created
+                        height: Theme.fontSizeMedium + Theme.paddingSmall * 2
+                        spacing: Theme.paddingMedium
+
+                        Label {
+                            color: delegate.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
+                            text: model.created
+                        }
+
+                        Repeater {
+                            width: parent.width
+                            height: Theme.fontSizeMedium
+                            model: labels
+                            delegate: Label {
+                                text: modelData
+                                padding: Theme.paddingSmall
+                                font.pixelSize: Theme.fontSizeExtraSmall
+
+                                Rectangle {
+                                    z: -1
+                                    color: Theme.secondaryHighlightColor
+                                    height: parent.height
+                                    width: parent.width
+                                    radius: Theme.fontSizeTiny / 2
+                                }
+                            }
+                        }
                     }
+
                 }
 
                 Separator {

@@ -63,25 +63,35 @@ void NewsLoader::listReplyFinished()
     page = root["page"].toInt();
     total = root["total"].toInt();
     QJsonArray items = root["items"].toArray();
-    QJsonArray::const_iterator i;
+    QJsonArray::const_iterator i, iLabels;
+    QJsonArray labels;
     QJsonObject apiArticle;
     for (i = items.constBegin(); i != items.constEnd(); i++){
         apiArticle = (*i).toObject();
-        Article article;
-        article.setId(apiArticle["id"].toInt());
+        Article *article = new Article();
+        article->setId(apiArticle["id"].toInt());
         QDateTime createdDate = QDateTime::fromMSecsSinceEpoch((qint64)apiArticle["created"].toInt() * 1000, Qt::UTC).toLocalTime();
-        article.setCreated(createdDate.toString(timeFormat));
-        article.setCreatedDate(createdDate.toString(dateFormat));
-        article.setLink(apiArticle["link"].toString());
+        article->setCreated(createdDate.toString(timeFormat));
+        article->setCreatedDate(createdDate.toString(dateFormat));
+        article->setLink(apiArticle["link"].toString());
         if(apiArticle["imagePreviewLink"].isString()){
-            article.setImagePreviewLink(apiArticle["imagePreviewLink"].toString());
+            article->setImagePreviewLink(apiArticle["imagePreviewLink"].toString());
         }
-        article.setTitle(apiArticle["title"].toString());
+        article->setTitle(apiArticle["title"].toString());
         if(apiArticle["subtitle"].isString()){
-            article.setSubtitle(apiArticle["subtitle"].toString());
+            article->setSubtitle(apiArticle["subtitle"].toString());
         }
-        article.setText(apiArticle["text"].toString());
-        article.setResource(apiArticle["resource"].toString());
+        article->setText(apiArticle["text"].toString());
+        article->setResource(apiArticle["resource"].toString());
+        if(apiArticle["isImportant"].isBool()){
+            article->setIsImportant(apiArticle["isImportant"].toBool());
+        }
+        labels = apiArticle["labels"].toArray();
+        for (iLabels = labels.constBegin(); iLabels != labels.constEnd(); iLabels++){
+            article->addLabel((*iLabels).toString());
+        }
+        article->addLabel("Відео");
+        article->addLabel("Фото");
         articlesListModel->add(article);
     }
 }

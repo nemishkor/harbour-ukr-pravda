@@ -1,8 +1,24 @@
 #include "article.h"
 
-Article::Article()
+Article::Article(QObject *parent):
+    QObject(parent)
 {
 
+}
+
+Article::Article(const Article &article):
+    QObject(article.parent()),
+    id(article.id),
+    created(article.created),
+    createdDate(article.createdDate),
+    link(article.link),
+    imagePreviewLink(article.imagePreviewLink),
+    title(article.title),
+    subtitle(article.subtitle),
+    text(article.text),
+    resource(article.resource)
+{
+    qDebug() << "copy Article";
 }
 
 int Article::getId() const
@@ -23,6 +39,16 @@ const QString &Article::getCreated() const
 void Article::setCreated(const QString &newCreated)
 {
     created = newCreated;
+}
+
+const QString &Article::getCreatedDate() const
+{
+    return createdDate;
+}
+
+void Article::setCreatedDate(const QString &newCreatedDate)
+{
+    createdDate = newCreatedDate;
 }
 
 const QString &Article::getLink() const
@@ -85,12 +111,22 @@ void Article::setResource(const QString &newResource)
     resource = newResource;
 }
 
-const QString &Article::getCreatedDate() const
+const QStringList &Article::getLabels() const
 {
-    return createdDate;
+    return labels;
 }
 
-void Article::setCreatedDate(const QString &newCreatedDate)
+void Article::addLabel(const QString &newLabel)
 {
-    createdDate = newCreatedDate;
+    labels.append(newLabel);
+}
+
+bool Article::getIsImportant() const
+{
+    return isImportant;
+}
+
+void Article::setIsImportant(bool newIsImportant)
+{
+    isImportant = newIsImportant;
 }

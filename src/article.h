@@ -1,18 +1,25 @@
 #ifndef ARTICLE_H
 #define ARTICLE_H
 
+#include <QDebug>
+#include <QObject>
 #include <QString>
 
-class Article
+class Article : public QObject
 {
+    Q_OBJECT
 public:
-    Article();
+    explicit Article(QObject *parent = nullptr);
+    Article(const Article &);
 
     int getId() const;
     void setId(int newId);
 
     const QString &getCreated() const;
     void setCreated(const QString &newCreated);
+
+    const QString &getCreatedDate() const;
+    void setCreatedDate(const QString &newCreated_date);
 
     const QString &getLink() const;
     void setLink(const QString &newLink);
@@ -32,8 +39,11 @@ public:
     const QString &getResource() const;
     void setResource(const QString &newResource);
 
-    const QString &getCreatedDate() const;
-    void setCreatedDate(const QString &newCreated_date);
+    const QStringList &getLabels() const;
+    void addLabel(const QString &newLabel);
+
+    bool getIsImportant() const;
+    void setIsImportant(bool newIsImportant);
 
 private:
     int id;
@@ -45,6 +55,8 @@ private:
     QString subtitle;
     QString text;
     QString resource;
+    QStringList labels;
+    bool isImportant;
 };
 
 #endif // ARTICLE_H
