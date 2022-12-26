@@ -11,9 +11,9 @@ Name:       harbour-ukr-pravda-news
 Summary:    Ukr Pravda News
 Version:    0.1
 Release:    1
-Group:      Qt/Qt
-License:    LICENSE
-URL:        http://example.org/
+Group:      Applications/Internet
+License:    MIT
+URL:        https://www.pravda.com.ua
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  harbour-ukr-pravda-news.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
@@ -24,7 +24,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  desktop-file-utils
 
 %description
-Short description of my Sailfish OS Application
+Ukrainska pravda client
 
 
 %prep

@@ -3,6 +3,8 @@
 
 #include <QObject>
 #include <QSettings>
+#include <QCoreApplication>
+#include <QStandardPaths>
 
 class Settings : public QObject
 {

@@ -16,8 +16,7 @@ void msgHandler(QtMsgType type, const QMessageLogContext & context, const QStrin
 
     QString timeStr(dateTime.toString("dd-MM-yyyy HH:mm:ss:zzz"));
     QString contextString(QString("(%1, %2)").arg(context.file).arg(context.line));
-
-    QFile outFile("file.log");
+    QFile outFile(QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/debug.log");
     outFile.open(QIODevice::WriteOnly | QIODevice::Append);
 
     QTextStream stream(&outFile);
@@ -28,7 +27,7 @@ void msgHandler(QtMsgType type, const QMessageLogContext & context, const QStrin
 
 int main(int argc, char *argv[])
 {
-    // qInstallMessageHandler(msgHandler);
+//     qInstallMessageHandler(msgHandler);
 
     // SailfishApp::main() will display "qml/harbour-ukr-pravda-news.qml", if you need more
     // control over initialization, you can use:

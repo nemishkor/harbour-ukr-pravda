@@ -2,11 +2,12 @@
 
 Settings::Settings(QObject *parent) : QObject(parent)
 {
-    settings = new QSettings("org.nemishkor", "ukr-pravda-news", this);
+    const QString settingsPath =
+        QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation)
+        + "/" + QCoreApplication::applicationName() + ".conf";
+    settings = new QSettings(settingsPath, QSettings::NativeFormat);
     languageKey = "language";
-    if(settings->contains(languageKey)) {
-        language = settings->value(languageKey).toInt();
-    }
+    language = settings->value(languageKey, QVariant(0)).toInt();
     if(language != 0 && language != 1 && language != 2 && language != 3){
         setLanguage(defaultLanguage);
     }
@@ -24,6 +25,5 @@ void Settings::setLanguage(int newLanguage)
     }
     language = newLanguage;
     settings->setValue(languageKey, newLanguage);
-    settings->sync();
     emit languageChanged();
 }
