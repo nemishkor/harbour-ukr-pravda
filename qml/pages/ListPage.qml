@@ -80,6 +80,41 @@ Page {
                     spacing: Theme.paddingSmall
                     width: parent.width
 
+                    property int imagePreviewHeight: Math.round(width * 14 / 25)
+
+                    Image {
+                        id: imagePreview
+                        visible: model.imagePreviewLink !== ""
+                        width: parent.width
+                        height: column.imagePreviewHeight
+                        source: model.imagePreviewLink
+                        fillMode: Image.PreserveAspectCrop
+                        clip: true
+                    }
+
+                    Item {
+                        width: parent.width
+                        height: column.imagePreviewHeight
+                        visible: imagePreview.status === Image.Loading
+                        BusyIndicator {
+                            id: imagePreviewLoaderIndicator
+                            y: parent.height / 2 - height / 2
+                            running: parent.visible
+                            size: BusyIndicatorSize.Small
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
+                        ProgressBar {
+                            id: progressBar
+                            anchors {
+                                top: imagePreviewLoaderIndicator.bottom
+                                topMargin: Theme.paddingSmall
+                                horizontalCenter: parent.horizontalCenter
+                            }
+                            width: parent.width * 0.8
+                            value: imagePreview.progress
+                        }
+                    }
+
                     Label {
                         x: Theme.horizontalPageMargin
                         width: parent.width - 2 * Theme.horizontalPageMargin
