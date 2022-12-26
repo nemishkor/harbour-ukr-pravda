@@ -9,8 +9,10 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QPointer>
+#include <QUrlQuery>
 
 #include "articleslistmodel.h"
+#include "settings.h"
 
 class NewsLoader : public QObject
 {
@@ -18,7 +20,7 @@ class NewsLoader : public QObject
     Q_PROPERTY(bool loading READ isLoading NOTIFY loadingChanged)
     Q_PROPERTY(QString error READ getError NOTIFY errorChanged)
 public:
-    explicit NewsLoader(ArticlesListModel *articlesListModel, QObject *parent = nullptr);
+    explicit NewsLoader(Settings *settings, ArticlesListModel *articlesListModel, QObject *parent = nullptr);
     Q_INVOKABLE void loadList();
     bool isLoading();
     QString &getError();
@@ -28,6 +30,7 @@ private:
     QString timeFormat;
     QNetworkAccessManager *networkManager;
     QPointer<QNetworkReply> listReply;
+    Settings * settings;
     ArticlesListModel *articlesListModel;
     int page = 1;
     int total = -1;

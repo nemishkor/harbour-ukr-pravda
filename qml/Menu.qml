@@ -37,6 +37,16 @@ Rectangle {
                     icon: "icon-m-document"
                     page: "pages/ArticlePage.qml"
                 }
+                ListElement {
+                    mode: 3
+                    icon: "icon-m-developer-mode"
+                    page: "pages/SettingsPage.qml"
+                }
+                ListElement {
+                    mode: 4
+                    icon: "icon-m-presence"
+                    page: "pages/AboutPage.qml"
+                }
             }
             delegate: Rectangle {
 

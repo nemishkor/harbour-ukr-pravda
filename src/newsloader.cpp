@@ -1,7 +1,8 @@
 #include "newsloader.h"
 
-NewsLoader::NewsLoader(ArticlesListModel *articlesListModel, QObject *parent) :
+NewsLoader::NewsLoader(Settings *settings, ArticlesListModel *articlesListModel, QObject *parent) :
     QObject(parent),
+    settings(settings),
     articlesListModel(articlesListModel)
 {
     dateFormat = QLocale::system().dateFormat(QLocale::ShortFormat);
@@ -20,6 +21,9 @@ void NewsLoader::loadList()
     error.clear();
     emit errorChanged();
     QUrl url(apiBaseUrl + "/api/articles");
+    QUrlQuery query;
+    query.addQueryItem("language", QString::number(settings->getLanguage()));
+    url.setQuery(query);
     qDebug() << "request to" << url.toString();
     QNetworkRequest request(url);
     listReply = networkManager->get(request);

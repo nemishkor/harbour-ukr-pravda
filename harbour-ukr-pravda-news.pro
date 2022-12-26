@@ -18,12 +18,15 @@ SOURCES += src/harbour-ukr-pravda-news.cpp \
     src/article.cpp \
     src/articleslistmodel.cpp \
     src/news.cpp \
-    src/newsloader.cpp
+    src/newsloader.cpp \
+    src/settings.cpp
 
 DISTFILES += qml/harbour-ukr-pravda-news.qml \
-    qml/Dock.qml \
     qml/Menu.qml \
     qml/cover/CoverPage.qml \
+    qml/pages/AboutPage.qml \
+    qml/pages/SettingsPage.qml \
+    qml/pages/WelcomePage.qml \
     qml/pages/ArticlePage.qml \
     qml/pages/ListPage.qml \
     rpm/harbour-ukr-pravda-news.changes.in \
@@ -49,4 +52,5 @@ HEADERS += \
     src/article.h \
     src/articleslistmodel.h \
     src/news.h \
-    src/newsloader.h
+    src/newsloader.h \
+    src/settings.h

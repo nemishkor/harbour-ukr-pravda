@@ -3,11 +3,14 @@ import Sailfish.Silica 1.0
 import "pages"
 
 ApplicationWindow {
-    initialPage: Component { ListPage { } }
+    initialPage: Qt.resolvedUrl(settings.language === 0 ? "pages/WelcomePage.qml" : "pages/ListPage.qml")
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
-    bottomMargin: dock.height
+    bottomMargin: dock.visible ? dock.height : 0
 
-    Menu { id: dock }
+    Menu {
+        id: dock
+        visible: settings.language !== 0
+    }
 
 }

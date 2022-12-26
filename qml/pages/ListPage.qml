@@ -8,6 +8,7 @@ Page {
 
     onStatusChanged: {
         if (status === PageStatus.Active){
+            articlesListModel.clear()
             newsLoader.loadList()
             news.mode = 0
         }

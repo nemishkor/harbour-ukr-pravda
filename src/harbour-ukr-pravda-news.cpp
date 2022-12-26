@@ -4,6 +4,7 @@
 #include "articleslistmodel.h"
 #include "news.h"
 #include "newsloader.h"
+#include "settings.h"
 
 static QMutex mutex; // global variable
 
@@ -46,13 +47,15 @@ int main(int argc, char *argv[])
     Article article;
     ArticlesListModel list(&article);
     News news(&article, &list);
-    NewsLoader newsLoader(&list);
+    Settings settings;
+    NewsLoader newsLoader(&settings, &list);
 
     QQmlContext *context = view.data()->rootContext();
     context->setContextProperty("articlesListModel", &list);
     context->setContextProperty("newsLoader", &newsLoader);
     context->setContextProperty("article", &article);
     context->setContextProperty("news", &news);
+    context->setContextProperty("settings", &settings);
 
     qDebug() << "Start";
 
