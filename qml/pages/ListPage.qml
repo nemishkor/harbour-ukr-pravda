@@ -85,7 +85,7 @@ Page {
 
                     Image {
                         id: imagePreview
-                        visible: model.imagePreviewLink !== ""
+                        visible: model.imagePreviewLink !== "" && status !== Image.Loading
                         width: parent.width
                         height: column.imagePreviewHeight
                         source: model.imagePreviewLink
@@ -117,12 +117,43 @@ Page {
                     }
 
                     Label {
-                        x: Theme.horizontalPageMargin
-                        width: parent.width - 2 * Theme.horizontalPageMargin
+                        x: Theme.horizontalPageMargin + 27 + Theme.paddingMedium
+                        width: parent.width - 2 * Theme.horizontalPageMargin - 27 - Theme.paddingMedium
                         color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
                         wrapMode: "WordWrap"
                         text: model.title
                         font.bold: model.isImportant
+
+                        GlassItem {
+                            id: button
+                            anchors {
+                                right: parent.left
+                                rightMargin: Theme.paddingMedium
+                                top: parent.top
+                                bottom: parent.bottom
+                            }
+
+                            width: 27
+                            falloffRadius: 0.295
+                            radius: 0.115
+                            ratio: 0.0
+                            cache: false
+                            color: {
+                                if(model.resource === "pravda")
+                                    return "#7e0019"
+                                if(model.resource === "epravda")
+                                    return "#4a5d32"
+                                if(model.resource === "life_pravda")
+                                    return "#f4f5f7"
+                                if(model.resource === "eurointegration")
+                                    return "#0f5499"
+                                if(model.resource === "istpravda")
+                                    return "#f9f2ef"
+                                if(model.resource === "tabloid_pravda")
+                                    return "#4e3cca"
+                                return "#f4f5f7"
+                            }
+                        }
                     }
 
                     Label {

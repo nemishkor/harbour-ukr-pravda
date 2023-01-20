@@ -60,6 +60,99 @@ Page {
                 }
 
                 Label {
+                    width: parent.width - 2 * Theme.horizontalPageMargin - 27 - Theme.paddingMedium
+                    anchors {
+                        left: parent.left
+                        leftMargin: Theme.horizontalPageMargin + 27 + Theme.paddingMedium
+                    }
+                    font.pixelSize: Theme.fontSizeSmall
+                    text: {
+                        if(model.resource === "pravda")
+                            return qsTr("Ukrainska pravda")
+                        if(model.resource === "epravda")
+                            return qsTr("Economic")
+                        if(model.resource === "life_pravda")
+                            return qsTr("Life")
+                        if(model.resource === "eurointegration")
+                            return qsTr("Eurointegration")
+                        if(model.resource === "istpravda")
+                            return qsTr("History")
+                        if(model.resource === "tabloid_pravda")
+                            return qsTr("Tabloid")
+                        return ""
+                    }
+
+                   color: {
+                       if(Theme.colorScheme === Theme.DarkOnLight){
+                           if(model.resource === "pravda")
+                               return "#7e0019"
+                           if(model.resource === "epravda")
+                               return "#4a5d32"
+                           if(model.resource === "life_pravda")
+                               return "#5f6a82"
+                           if(model.resource === "eurointegration")
+                               return "#0f5499"
+                           if(model.resource === "istpravda")
+                               return "#7b6c66"
+                           if(model.resource === "tabloid_pravda")
+                               return "#4e3cca"
+                           return "#f4f5f7"
+                       }
+
+                       if(model.resource === "pravda")
+                           return "#ec2f54"
+                       if(model.resource === "epravda")
+                           return "#9bcc5e"
+                       if(model.resource === "life_pravda")
+                           return "#f4f5f7"
+                       if(model.resource === "eurointegration")
+                           return "#3c9cfd"
+                       if(model.resource === "istpravda")
+                           return "#f9f2ef"
+                       if(model.resource === "tabloid_pravda")
+                           return "#a165f9"
+                       return "#2d2d2d"
+                   }
+
+                    GlassItem {
+                        id: button
+                        anchors {
+                            right: parent.left
+                            rightMargin: Theme.paddingMedium
+                            top: parent.top
+                            bottom: parent.bottom
+                        }
+
+                        width: 27
+                        falloffRadius: 0.295
+                        radius: 0.115
+                        ratio: 0.0
+                        cache: false
+                        color: {
+                            if(model.resource === "pravda")
+                                return "#7e0019"
+                            if(model.resource === "epravda")
+                                return "#4a5d32"
+                            if(model.resource === "life_pravda")
+                                return "#f4f5f7"
+                            if(model.resource === "eurointegration")
+                                return "#0f5499"
+                            if(model.resource === "istpravda")
+                                return "#f9f2ef"
+                            if(model.resource === "tabloid_pravda")
+                                return "#4e3cca"
+                            return "#f4f5f7"
+                        }
+                    }
+                }
+
+                Rectangle {
+                    width: parent.width
+                    height: Theme.paddingMedium
+                    color: "transparent"
+                }
+
+                Label {
                     width: parent.width - 2 * Theme.horizontalPageMargin
                     anchors {
                         left: parent.left

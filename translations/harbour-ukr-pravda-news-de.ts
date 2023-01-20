@@ -54,12 +54,36 @@
         <source>Open full page</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Ukrainska pravda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Economic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Life</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eurointegration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabloid</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
-        <translation>Mein Cover</translation>
+        <source>Ukrainska pravda</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
