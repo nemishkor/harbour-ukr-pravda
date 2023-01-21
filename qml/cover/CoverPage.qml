@@ -6,5 +6,6 @@ CoverBackground {
         id: label
         anchors.centerIn: parent
         text: qsTr("Ukrainska pravda")
+        textFormat: Text.PlainText
     }
 }

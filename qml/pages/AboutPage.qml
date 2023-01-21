@@ -21,6 +21,7 @@ Page {
 
             Label {
                 text: qsTr("Journalists fight on their own frontline. Support Ukrainska pravda!")
+                textFormat: Text.PlainText
                 color: Theme.highlightColor
                 font.pixelSize: Theme.fontSizeLarge
                 wrapMode: Text.WordWrap
@@ -30,6 +31,7 @@ Page {
 
             Label {
                 text: qsTr("No one in Ukraine knows the days of the week from Monday anymore, everyone is counting the days since the beginning of the war. And everyone who considers oneself a Ukrainian - in their own land or abroad, endeavors to bring the time of our victory closer.")
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: parent.width - 2 * Theme.horizontalPageMargin
@@ -108,6 +110,7 @@ Page {
 
             Label {
                 text: qsTr("“Come Back Alive” is a Foundation providing competent assistance to the military. Since 2014, our key goal has been to make the Defense Forces more efficient, save the lives of the military and systematically counter the enemy. Since the beginning of the full-scale invasion in February 2022, we have multiplied our military assistance and supported the defenders of Ukraine, who have changed their everyday lives and joined the line of defense.")
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: parent.width - 2 * Theme.horizontalPageMargin
@@ -116,6 +119,7 @@ Page {
 
             Label {
                 text: qsTr("The Foundation purchases equipment that helps saving the lives of the military, including thermal imaging optics, quadcopters, cars, security, and intelligence systems.")
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: parent.width - 2 * Theme.horizontalPageMargin
@@ -124,6 +128,7 @@ Page {
 
             Label {
                 text: qsTr("“Come Back Alive” is the first charity organization in Ukraine that received a license for the purchase and import of military and dual purpose goods. In particular, the team of the organization purchased and transferred to the units of the Defense Forces a complex of the Bayraktar TB2 attack UAV, consisting of three drones, a ground station, guided ammunition and other equipment, and 11 special armored vehicles.")
+                textFormat: Text.PlainText
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
                 width: parent.width - 2 * Theme.horizontalPageMargin

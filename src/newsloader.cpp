@@ -11,6 +11,13 @@ NewsLoader::NewsLoader(Settings *settings, ArticlesListModel *articlesListModel,
     apiBaseUrl = "http://104.248.143.138";
 }
 
+void NewsLoader::refreshList()
+{
+    page = 1;
+    articlesListModel->clear();
+    loadList();
+}
+
 void NewsLoader::loadList()
 {
     if(listReply){
@@ -23,22 +30,19 @@ void NewsLoader::loadList()
     QUrl url(apiBaseUrl + "/api/articles");
     QUrlQuery query;
     query.addQueryItem("language", QString::number(settings->getLanguage()));
-
-    if(articlesListModel->rowCount() > 0) {
-        QModelIndex lastArticleIndex = articlesListModel->index(articlesListModel->rowCount() - 1, 0);
-        QVariant lastId = articlesListModel->data(lastArticleIndex, ArticlesListModel::IdRole);
-        if(lastId.type() == QVariant::Int) {
-            query.addQueryItem("since", QString::number(lastId.toInt()));
-        }
-    }
-
+    query.addQueryItem("page", QString::number(page));
     url.setQuery(query);
-
     qDebug() << "request to" << url.toString();
     listReply = networkManager->get(QNetworkRequest(url));
     emit loadingChanged();
     connect(listReply, &QNetworkReply::finished, this, &NewsLoader::listReplyFinished);
     connect(listReply, &QNetworkReply::sslErrors, this, &NewsLoader::listReplySslErrors);
+}
+
+void NewsLoader::loadNextPageList()
+{
+    page++;
+    loadList();
 }
 
 bool NewsLoader::isLoading()

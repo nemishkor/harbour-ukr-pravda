@@ -31,6 +31,7 @@ Page {
                     leftMargin: Theme.horizontalPageMargin
                     horizontalCenter: parent.horizontalCenter
                 }
+                textFormat: Text.PlainText
             }
 
             Item {
@@ -136,6 +137,7 @@ Page {
                         text: model.languageName
                         padding: Theme.paddingLarge
                         color: mouseArea.pressed ? Theme.highlightColor : Theme.primaryColor
+                        textFormat: Text.PlainText
 
                         Rectangle {
                             z: -1

@@ -9,9 +9,8 @@ Page {
     allowedOrientations: Orientation.All
 
     onStatusChanged: {
-        if (status === PageStatus.Active){
-            articlesListModel.clear()
-            newsLoader.loadList()
+        if (status === PageStatus.Activating && articlesListModel.count === 0){
+            newsLoader.refreshList()
             news.mode = 0
         }
     }
@@ -24,10 +23,7 @@ Page {
             MenuItem {
                 text: qsTr("Refresh")
                 enabled: !newsLoader.loading
-                onClicked: {
-                    articlesListModel.clear()
-                    newsLoader.loadList()
-                }
+                onClicked: newsLoader.refreshList()
             }
         }
 
@@ -35,7 +31,7 @@ Page {
             running: true
             size: BusyIndicatorSize.Large
             anchors.centerIn: parent
-            visible: newsLoader.loading
+            visible: newsLoader.loading && articlesListModel.count === 0
         }
 
         Label {
@@ -47,13 +43,14 @@ Page {
             font.pixelSize: Theme.fontSizeLarge
             width: parent.width - 2 * Theme.horizontalPageMargin
             wrapMode: Text.WordWrap
+            textFormat: Text.PlainText
         }
 
         SilicaListView {
             id: listView
             model: articlesListModel
             anchors.fill: parent
-            visible: !newsLoader.loading
+            visible: articlesListModel.count > 0 && newsLoader.error === ""
 
             header: PageHeader {
                 title: qsTr("Ukrainska pravda")
@@ -76,11 +73,35 @@ Page {
                 subtitle: model.subtitle
                 created: model.created
                 labels: model.labels
-                isLast: (index + 1) === listView.count
                 resource: model.resource
             }
 
+            onAtYEndChanged: {
+                if (listView.atYEnd) {
+                    newsLoader.loadNextPageList()
+                }
+            }
+
             VerticalScrollDecorator {}
+        }
+
+        Rectangle {
+            width: Theme.itemSizeMedium
+            height: width
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: Theme.paddingMedium
+                horizontalCenter: parent.horizontalCenter
+            }
+            radius: width
+            color: Theme.highlightDimmerColor
+            visible: newsLoader.loading && articlesListModel.count > 0
+
+            BusyIndicator {
+                running: true
+                size: BusyIndicatorSize.Medium
+                anchors.centerIn: parent
+            }
         }
 
     }

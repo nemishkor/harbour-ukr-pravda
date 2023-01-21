@@ -9,7 +9,7 @@ Name:       harbour-ukr-pravda-news
 # << macros
 
 Summary:    Ukr Pravda News
-Version:    0.1
+Version:    0.2
 Release:    1
 Group:      Applications/Internet
 License:    MIT

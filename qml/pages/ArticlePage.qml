@@ -57,6 +57,7 @@ Page {
                     text: model.title
                     wrapMode: Text.WordWrap
                     font.pixelSize: Theme.fontSizeLarge
+                    textFormat: Text.PlainText
                 }
 
                 Rectangle {
@@ -87,38 +88,39 @@ Page {
                             return qsTr("Tabloid")
                         return ""
                     }
+                    textFormat: Text.PlainText
 
-                   color: {
-                       if(Theme.colorScheme === Theme.DarkOnLight){
-                           if(model.resource === "pravda")
-                               return "#7e0019"
-                           if(model.resource === "epravda")
-                               return "#4a5d32"
-                           if(model.resource === "life_pravda")
-                               return "#5f6a82"
-                           if(model.resource === "eurointegration")
-                               return "#0f5499"
-                           if(model.resource === "istpravda")
-                               return "#7b6c66"
-                           if(model.resource === "tabloid_pravda")
-                               return "#4e3cca"
-                           return "#f4f5f7"
-                       }
+                    color: {
+                        if(Theme.colorScheme === Theme.DarkOnLight){
+                            if(model.resource === "pravda")
+                                return "#7e0019"
+                            if(model.resource === "epravda")
+                                return "#4a5d32"
+                            if(model.resource === "life_pravda")
+                                return "#5f6a82"
+                            if(model.resource === "eurointegration")
+                                return "#0f5499"
+                            if(model.resource === "istpravda")
+                                return "#7b6c66"
+                            if(model.resource === "tabloid_pravda")
+                                return "#4e3cca"
+                            return "#f4f5f7"
+                        }
 
-                       if(model.resource === "pravda")
-                           return "#ec2f54"
-                       if(model.resource === "epravda")
-                           return "#9bcc5e"
-                       if(model.resource === "life_pravda")
-                           return "#f4f5f7"
-                       if(model.resource === "eurointegration")
-                           return "#3c9cfd"
-                       if(model.resource === "istpravda")
-                           return "#f9f2ef"
-                       if(model.resource === "tabloid_pravda")
-                           return "#a165f9"
-                       return "#2d2d2d"
-                   }
+                        if(model.resource === "pravda")
+                            return "#ec2f54"
+                        if(model.resource === "epravda")
+                            return "#9bcc5e"
+                        if(model.resource === "life_pravda")
+                            return "#f4f5f7"
+                        if(model.resource === "eurointegration")
+                            return "#3c9cfd"
+                        if(model.resource === "istpravda")
+                            return "#f9f2ef"
+                        if(model.resource === "tabloid_pravda")
+                            return "#a165f9"
+                        return "#2d2d2d"
+                    }
 
                     GlassItem {
                         id: button
@@ -166,6 +168,7 @@ Page {
                     }
                     text: model.created + " " + model.createdDate
                     font.pixelSize: Theme.fontSizeSmall
+                    textFormat: Text.PlainText
                 }
                 Label {
                     width: parent.width - 2 * Theme.horizontalPageMargin
@@ -175,6 +178,7 @@ Page {
                     }
                     text: model.subtitle
                     wrapMode: Text.WordWrap
+                    textFormat: Text.PlainText
                 }
                 Label {
                     width: parent.width - 2 * Theme.horizontalPageMargin

@@ -21,7 +21,9 @@ class NewsLoader : public QObject
     Q_PROPERTY(QString error READ getError NOTIFY errorChanged)
 public:
     explicit NewsLoader(Settings *settings, ArticlesListModel *articlesListModel, QObject *parent = nullptr);
-    Q_INVOKABLE void loadList();
+    Q_INVOKABLE void refreshList();
+    void loadList();
+    Q_INVOKABLE void loadNextPageList();
     bool isLoading();
     QString &getError();
 

@@ -30,7 +30,7 @@ DISTFILES += qml/harbour-ukr-pravda-news.qml \
     qml/pages/WelcomePage.qml \
     qml/pages/ArticlePage.qml \
     qml/pages/ListPage.qml \
-    rpm/harbour-ukr-pravda-news.changes.in \
+    rpm/harbour-ukr-pravda-news.changes \
     rpm/harbour-ukr-pravda-news.changes.run.in \
     rpm/harbour-ukr-pravda-news.spec \
     rpm/harbour-ukr-pravda-news.yaml \
