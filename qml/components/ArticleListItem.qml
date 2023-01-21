@@ -10,13 +10,12 @@ ListItem {
     property string subtitle
     property string created
     property var labels
-    property bool isLast
     property string resource
 
     property int imagePreviewHeight: Math.round(width * 14 / 25)
     property int resourceIndicatorWidth: 27
 
-    contentHeight: column.height + separator.height + Theme.paddingMedium * 2
+    contentHeight: column.height + Theme.paddingLarge
     onClicked: {
         news.mode = 1
         pageStack.replace(Qt.resolvedUrl("../pages/ArticlePage.qml"), { index: index }, PageStackAction.Immediate)
@@ -25,7 +24,6 @@ ListItem {
     Column {
         id: column
 
-        y: Theme.paddingMedium
         spacing: Theme.paddingSmall
         width: parent.width
 
@@ -71,18 +69,21 @@ ListItem {
         }
 
         Label {
-            x: Theme.horizontalPageMargin + root.resourceIndicatorWidth + Theme.paddingMedium
-            width: parent.width - 2 * Theme.horizontalPageMargin - root.resourceIndicatorWidth - Theme.paddingMedium
+            x: Theme.horizontalPageMargin
+            width: parent.width - 2 * Theme.horizontalPageMargin
             color: root.highlighted ? Theme.highlightColor : Theme.primaryColor
             wrapMode: "WordWrap"
             text: root.title
             font.bold: root.isImportant
+            textFormat: Text.PlainText
+            rightPadding: createdLabel.width + Theme.paddingSmall
+            leftPadding: root.resourceIndicatorWidth + Theme.paddingSmall
 
             GlassItem {
                 id: resourceIndicator
                 anchors {
-                    right: parent.left
-                    rightMargin: Theme.paddingMedium
+                    left: parent.left
+                    leftMargin: -10
                     top: parent.top
                     bottom: parent.bottom
                 }
@@ -108,6 +109,19 @@ ListItem {
                 }
                 opacity: root.highlighted ? 0.5 : 1.0
             }
+
+            Label {
+                id: createdLabel
+                anchors {
+                    right: parent.right
+                    top: parent.top
+                    topMargin: Theme.paddingSmall
+                }
+                color: root.highlighted ? Theme.secondaryHighlightColor : Theme.primaryColor
+                text: root.created
+                font.pixelSize: Theme.fontSizeExtraSmall
+                textFormat: Text.PlainText
+            }
         }
 
         Label {
@@ -117,18 +131,15 @@ ListItem {
             color: root.highlighted ? Theme.highlightColor : Theme.primaryColor
             wrapMode: "WordWrap"
             text: root.subtitle
+            textFormat: Text.PlainText
         }
 
         Row {
+            visible: root.labels.length > 0
             x: Theme.horizontalPageMargin
             width: parent.width - 2 * Theme.horizontalPageMargin
             height: Theme.fontSizeMedium + Theme.paddingSmall * 2
             spacing: Theme.paddingMedium
-
-            Label {
-                color: root.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
-                text: root.created
-            }
 
             Repeater {
                 width: parent.width
@@ -152,16 +163,4 @@ ListItem {
 
     }
 
-    Separator {
-        id: separator
-        visible: !isLast
-        anchors {
-            top: column.bottom
-            topMargin: Theme.paddingMedium
-        }
-
-        width: parent.width
-        color: Theme.primaryColor
-        horizontalAlignment: Qt.AlignHCenter
-    }
 }
