@@ -37,6 +37,12 @@ ListItem {
             width: parent.width
             height: root.imagePreviewHeight
             source: root.imagePreviewLink
+
+            Rectangle {
+                visible: root.highlighted
+                anchors.fill: parent
+                color: root.highlightedColor
+            }
         }
 
         Item {
@@ -100,6 +106,7 @@ ListItem {
                         return "#4e3cca"
                     return "#f4f5f7"
                 }
+                opacity: root.highlighted ? 0.5 : 1.0
             }
         }
 
