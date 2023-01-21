@@ -23,10 +23,19 @@ void NewsLoader::loadList()
     QUrl url(apiBaseUrl + "/api/articles");
     QUrlQuery query;
     query.addQueryItem("language", QString::number(settings->getLanguage()));
+
+    if(articlesListModel->rowCount() > 0) {
+        QModelIndex lastArticleIndex = articlesListModel->index(articlesListModel->rowCount() - 1, 0);
+        QVariant lastId = articlesListModel->data(lastArticleIndex, ArticlesListModel::IdRole);
+        if(lastId.type() == QVariant::Int) {
+            query.addQueryItem("since", QString::number(lastId.toInt()));
+        }
+    }
+
     url.setQuery(query);
+
     qDebug() << "request to" << url.toString();
-    QNetworkRequest request(url);
-    listReply = networkManager->get(request);
+    listReply = networkManager->get(QNetworkRequest(url));
     emit loadingChanged();
     connect(listReply, &QNetworkReply::finished, this, &NewsLoader::listReplyFinished);
     connect(listReply, &QNetworkReply::sslErrors, this, &NewsLoader::listReplySslErrors);
