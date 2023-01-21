@@ -20,6 +20,12 @@ Page {
             articlesListView.positionViewAtIndex(index, ListView.SnapPosition)
         }
 
+        onAtYEndChanged: {
+            if (articlesListView.atYEnd) {
+                console.log('end!')
+            }
+        }
+
         delegate: SilicaFlickable {
             contentHeight: col.height
             width: ListView.view.width
