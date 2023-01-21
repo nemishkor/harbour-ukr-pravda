@@ -176,8 +176,19 @@ Page {
                         left: parent.left
                         leftMargin: Theme.horizontalPageMargin
                     }
-                    text: model.text
+                    text: '
+                <html>
+                    <head><style>
+                        a { color: ' + Theme.highlightColor + '; }
+                        p + p { margin-top: ' + Theme.paddingMedium + 'px }
+                    </style></head>
+                    <body>
+                        ' + model.text + '
+                    </body>
+                </html>
+            '
                     wrapMode: Text.WordWrap
+                    textFormat: Text.RichText
                 }
                 Rectangle {
                     width: parent.width
