@@ -24,6 +24,7 @@ SOURCES += src/harbour-ukr-pravda-news.cpp \
 DISTFILES += qml/harbour-ukr-pravda-news.qml \
     qml/Menu.qml \
     qml/components/ArticleListItem.qml \
+    qml/components/ArticlesLoader.qml \
     qml/cover/CoverPage.qml \
     qml/pages/AboutPage.qml \
     qml/pages/SettingsPage.qml \

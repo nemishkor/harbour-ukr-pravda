@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Sailfish.Share 1.0
+import "../components"
 
 Page {
     id: page
@@ -7,6 +9,12 @@ Page {
     property int index;
 
     allowedOrientations: Orientation.All
+
+    ShareAction {
+        id: shareAction
+        title: qsTrId("Share link")
+        mimeType: "text/x-url"
+    }
 
     ListView {
         id: articlesListView
@@ -20,9 +28,9 @@ Page {
             articlesListView.positionViewAtIndex(index, ListView.SnapPosition)
         }
 
-        onAtYEndChanged: {
-            if (articlesListView.atYEnd) {
-                console.log('end!')
+        onAtXEndChanged: {
+            if (articlesListView.atXEnd) {
+                newsLoader.loadNextPageList()
             }
         }
 
@@ -33,8 +41,21 @@ Page {
 
             PullDownMenu {
                 MenuItem {
+                    text: qsTr("Share")
+                    onClicked: {
+                        shareAction.resources = [
+                            {
+                                "type": "text/x-url",
+                                "linkTitle": model.title,
+                                "status": model.link,
+                            }
+                        ]
+                        shareAction.trigger()
+                    }
+                }
+                MenuItem {
                     text: qsTr("Open full page")
-                    onClicked: Qt.openUrlExternally(articlesListModel.dataByIndex(index, "link"));
+                    onClicked: Qt.openUrlExternally(model.link);
                 }
             }
 
@@ -209,8 +230,11 @@ Page {
         }
     }
 
+    ArticlesLoader { }
+
     Rectangle {
         id: slider
+
         color: "transparent"
         anchors {
             left: parent.left
@@ -221,12 +245,14 @@ Page {
 
         Rectangle {
             id: sliderBackground
+
             anchors.fill: parent
             color: Theme.colorScheme === Theme.DarkOnLight ? Theme.lightPrimaryColor : Theme.darkPrimaryColor
         }
 
         OpacityRampEffect {
             id: effect
+
             slope: 2.0
             offset: 0.25
             sourceItem: sliderBackground
@@ -234,8 +260,8 @@ Page {
         }
 
         Item {
-//            visible: false
             id: sliderContainer
+
             x: Theme.horizontalPageMargin
             anchors { top: parent.top; bottom: parent.bottom }
             width: parent.width - 2 * Theme.horizontalPageMargin

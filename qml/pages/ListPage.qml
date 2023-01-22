@@ -85,24 +85,7 @@ Page {
             VerticalScrollDecorator {}
         }
 
-        Rectangle {
-            width: Theme.itemSizeMedium
-            height: width
-            anchors {
-                bottom: parent.bottom
-                bottomMargin: Theme.paddingMedium
-                horizontalCenter: parent.horizontalCenter
-            }
-            radius: width
-            color: Theme.highlightDimmerColor
-            visible: newsLoader.loading && articlesListModel.count > 0
-
-            BusyIndicator {
-                running: true
-                size: BusyIndicatorSize.Medium
-                anchors.centerIn: parent
-            }
-        }
+        ArticlesLoader { }
 
     }
 
