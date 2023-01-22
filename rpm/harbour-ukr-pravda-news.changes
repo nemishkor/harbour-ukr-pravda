@@ -14,5 +14,6 @@
 
 * Sat Jan 21 2023 Vitalii Koreniev <nemish94@gmail.com> 0.2-1
 - Updated UI: resource labels, links are readable now, list layout
-- Next page loading was added
+- Continuous scrolling was added
+- Share feature was added
 - Improved parsing
