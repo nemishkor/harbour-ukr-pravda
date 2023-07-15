@@ -54,6 +54,54 @@
         <source>Materials</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>210+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>800+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8000+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7000+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MILLION US DOLLARS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>raised for the needs of the Ukrainian army since 2014</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>off-road vehicles and 11 special armored vehicles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>purchased for the Ukrainian Armed Forces since the start of russian full-scale invasion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>UNITS OF THERMAL AND NIGHT VISION OPTICS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>purchased for the Ukrainian military during 8 years of the &quot;Come Back Alive&quot; foundation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DRONES, 65+ UAV COMPLEXES, AND BAYRAKTAR TB2 UNMANNED COMBAT AERIAL COMPLEX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>purchased for the Ukrainian army and special units</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ArticlePage</name>

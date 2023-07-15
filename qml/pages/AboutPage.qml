@@ -125,6 +125,69 @@ BasePage {
                 x: Theme.horizontalPageMargin
             }
 
+            Repeater {
+                model: ListModel {
+                    ListElement {
+                        number: qsTr("210+")
+                        title: qsTr("MILLION US DOLLARS")
+                        subtitle: qsTr("raised for the needs of the Ukrainian army since 2014")
+                    }
+                    ListElement {
+                        number: qsTr("800+")
+                        title: qsTr("off-road vehicles and 11 special armored vehicles")
+                        subtitle: qsTr("purchased for the Ukrainian Armed Forces since the start of russian full-scale invasion")
+                    }
+                    ListElement {
+                        number: qsTr("8000+")
+                        title: qsTr("UNITS OF THERMAL AND NIGHT VISION OPTICS")
+                        subtitle: qsTr("purchased for the Ukrainian military during 8 years of the \"Come Back Alive\" foundation")
+                    }
+                    ListElement {
+                        number: qsTr("7000+")
+                        title: qsTr("DRONES, 65+ UAV COMPLEXES, AND BAYRAKTAR TB2 UNMANNED COMBAT AERIAL COMPLEX")
+                        subtitle: qsTr("purchased for the Ukrainian army and special units")
+                    }
+                }
+
+                delegate: Column {
+                    width: parent.width
+                    height: numberLabel.height + titleLabel.height + subtitleLabel.height + Theme.paddingMedium
+
+                    Label {
+                        id: numberLabel
+                        text: number
+                        width: parent.width - 2 * Theme.horizontalPageMargin
+                        x: Theme.horizontalPageMargin
+                        color: Theme.highlightColor
+                        textFormat: Text.PlainText
+                        font.pixelSize: Theme.fontSizeHuge
+                        font.bold: true
+                    }
+
+                    Label {
+                        id: titleLabel
+                        text: title
+                        width: parent.width - 2 * Theme.horizontalPageMargin
+                        x: Theme.horizontalPageMargin
+                        color: Theme.highlightColor
+                        textFormat: Text.PlainText
+                        font.pixelSize: Theme.fontSizeLarge
+                        wrapMode: Text.WordWrap
+                    }
+
+                    Label {
+                        id: subtitleLabel
+                        text: subtitle
+                        width: parent.width - 2 * Theme.horizontalPageMargin
+                        x: Theme.horizontalPageMargin
+                        color: Theme.secondaryColor
+                        textFormat: Text.PlainText
+                        font.pixelSize: Theme.fontSizeLarge
+                        wrapMode: Text.WordWrap
+                    }
+                }
+            }
+
             Label {
                 text: qsTr("“Come Back Alive” is the first charity organization in Ukraine that received a license for the purchase and import of military and dual purpose goods. In particular, the team of the organization purchased and transferred to the units of the Defense Forces a complex of the Bayraktar TB2 attack UAV, consisting of three drones, a ground station, guided ammunition and other equipment, and 11 special armored vehicles.")
                 textFormat: Text.PlainText
