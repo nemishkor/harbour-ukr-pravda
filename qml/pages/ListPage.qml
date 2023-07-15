@@ -77,7 +77,7 @@ Page {
             }
 
             onAtYEndChanged: {
-                if (listView.atYEnd) {
+                if (articlesListModel.count > 0 && listView.atYEnd) {
                     newsLoader.loadNextPageList()
                 }
             }
