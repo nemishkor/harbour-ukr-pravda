@@ -37,7 +37,25 @@ Page {
                 }
             }
 
+            SectionHeader { text: "Resources" }
+
+            ListView {
+                model: resourcesListModel
+                width: parent.width
+                height: contentHeight
+                delegate: TextSwitch {
+                    text: name
+                    checked: model.enabled
+                    onCheckedChanged: {
+                        if(model.enabled !== checked){
+                            model.enabled = checked;
+                        }
+                    }
+                }
+            }
+
         }
+
     }
 
 }

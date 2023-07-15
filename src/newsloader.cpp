@@ -31,6 +31,7 @@ void NewsLoader::loadList()
     QUrlQuery query;
     query.addQueryItem("language", QString::number(settings->getLanguage()));
     query.addQueryItem("page", QString::number(page));
+    query.addQueryItem("resources", settings->getResources().join(","));
     url.setQuery(query);
     qDebug() << "request to" << url.toString();
     listReply = networkManager->get(QNetworkRequest(url));

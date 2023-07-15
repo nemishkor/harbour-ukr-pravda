@@ -17,9 +17,11 @@ CONFIG += sailfishapp
 SOURCES += src/harbour-ukr-pravda-news.cpp \
     src/article.cpp \
     src/articleslistmodel.cpp \
+    src/models/resource.cpp \
     src/news.cpp \
     src/newsloader.cpp \
-    src/settings.cpp
+    src/settings.cpp \
+    src/viewmodels/resourceslistmodel.cpp
 
 DISTFILES += qml/harbour-ukr-pravda-news.qml \
     qml/Menu.qml \
@@ -53,6 +55,8 @@ TRANSLATIONS += translations/harbour-ukr-pravda-news-de.ts
 HEADERS += \
     src/article.h \
     src/articleslistmodel.h \
+    src/models/resource.h \
     src/news.h \
     src/newsloader.h \
-    src/settings.h
+    src/settings.h \
+    src/viewmodels/resourceslistmodel.h
