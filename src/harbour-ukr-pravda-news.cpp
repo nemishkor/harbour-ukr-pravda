@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     context->setContextProperty("news", &news);
     context->setContextProperty("settings", &settings);
 
-    qDebug() << "Start";
+    qDebug() << "Start UI";
 
     view->setSource(SailfishApp::pathTo("qml/harbour-ukr-pravda-news.qml"));
     view->show();

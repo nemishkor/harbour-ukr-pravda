@@ -24,15 +24,10 @@ SOURCES += src/harbour-ukr-pravda-news.cpp \
     src/viewmodels/resourceslistmodel.cpp
 
 DISTFILES += qml/harbour-ukr-pravda-news.qml \
-    qml/Menu.qml \
-    qml/components/ArticleListItem.qml \
-    qml/components/ArticlesLoader.qml \
-    qml/cover/CoverPage.qml \
-    qml/pages/AboutPage.qml \
-    qml/pages/SettingsPage.qml \
-    qml/pages/WelcomePage.qml \
-    qml/pages/ArticlePage.qml \
-    qml/pages/ListPage.qml \
+    qml/*.qml \
+    qml/components/*.qml \
+    qml/cover/*.qml \
+    qml/pages/*.qml \
     rpm/harbour-ukr-pravda-news.changes \
     rpm/harbour-ukr-pravda-news.changes.run.in \
     rpm/harbour-ukr-pravda-news.spec \

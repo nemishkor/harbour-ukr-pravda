@@ -3,12 +3,10 @@ import Sailfish.Silica 1.0
 import Sailfish.Share 1.0
 import "../components"
 
-Page {
+BasePage {
     id: page
 
     property int index;
-
-    allowedOrientations: Orientation.All
 
     ShareAction {
         id: shareAction

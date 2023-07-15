@@ -42,6 +42,7 @@ void NewsLoader::loadList()
 
 void NewsLoader::loadNextPageList()
 {
+    qDebug() << "loadNextPageList()";
     page++;
     loadList();
 }

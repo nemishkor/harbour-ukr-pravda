@@ -1,28 +1,22 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
-Page {
+BasePage {
     id: page
-    allowedOrientations: Orientation.All
-
-    PageHeader {
-        id: header
-        title: qsTr("Settings")
-    }
 
     SilicaFlickable {
-        anchors {
-            top: header.bottom
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-        contentHeight: column.height
+        anchors.fill: parent
+        contentHeight: column.height + Theme.paddingLarge
 
         Column {
             id: column
             width: parent.width
             spacing: Theme.paddingMedium
+
+            PageHeader {
+                id: header
+                title: qsTr("Settings")
+            }
 
             ComboBox {
                 label: qsTr("Language")

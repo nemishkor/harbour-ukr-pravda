@@ -3,10 +3,8 @@ import Sailfish.Silica 1.0
 
 import "../components"
 
-Page {
+BasePage {
     id: page
-
-    allowedOrientations: Orientation.All
 
     onStatusChanged: {
         if (status === PageStatus.Activating && articlesListModel.count === 0){
