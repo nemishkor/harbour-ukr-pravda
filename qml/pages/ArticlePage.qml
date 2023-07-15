@@ -218,6 +218,7 @@ BasePage {
             '
                     wrapMode: Text.WordWrap
                     textFormat: Text.RichText
+                    onLinkActivated: Qt.openUrlExternally(link)
                 }
                 Rectangle {
                     width: parent.width
